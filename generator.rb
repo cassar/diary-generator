@@ -2,7 +2,7 @@ require 'erb'
 require 'active_support/all'
 require 'pry'
 
-PATH = "/Users/lukecassar/Google\ Drive/Personal\ Organisation\ Stuff/Diary/2019"
+DIARY_PATH = File.read('config').strip
 TOMORROW = 'tomorrow'
 
 time = Time.now
@@ -11,7 +11,7 @@ ordinal_day = time.day.ordinalize
 month = time.month
 month_name = time.strftime '%B'
 year = time.year
-output = ERB.new(File.read(PATH + '/typical_work_day_template.md')).result
-directory_name = "#{0 if month < 10}#{month}_#{month_name.downcase}"
-Dir.mkdir(directory_name) unless File.exists? directory_name
-File.write "#{PATH}/#{directory_name}/#{ordinal_day}.md", output
+output = ERB.new(File.read(DIARY_PATH + '/typical_work_day_template.md')).result
+directory_path = "#{DIARY_PATH}/#{0 if month < 10}#{month}_#{month_name.downcase}"
+Dir.mkdir(directory_path) unless File.exists? directory_path
+File.write "#{directory_path}/#{ordinal_day}.md", output
