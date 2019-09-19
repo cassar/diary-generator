@@ -2,8 +2,6 @@ require 'erb'
 require 'active_support/all'
 require 'pry'
 
-# TODO: Move to Repo
-
 PATH = "/Users/lukecassar/Google\ Drive/Personal\ Organisation\ Stuff/Diary/2019"
 TOMORROW = 'tomorrow'
 
