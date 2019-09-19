@@ -2,7 +2,7 @@ require 'erb'
 require 'active_support/all'
 require 'pry'
 
-DIARY_PATH = File.read('config').strip
+DIARY_PATH = File.read('.diary_config').strip
 TOMORROW = 'tomorrow'
 
 time = Time.now
