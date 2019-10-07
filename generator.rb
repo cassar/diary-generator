@@ -5,6 +5,7 @@ require 'pry'
 class DiaryGenerator
   DIARY_PATH = File.read('.diary_config').strip
   TOMORROW = 'tomorrow'
+  YESTERDAY = 'yesterday'
 
   attr_reader :time, :ordinal_day, :month, :month_name, :year, :directory_path
 
@@ -37,9 +38,14 @@ class DiaryGenerator
   end
 
   def determine_time
-    return Time.now.tomorrow if ARGV.first == TOMORROW
-
-    Time.now
+    case ARGV.first
+    when TOMORROW
+      Time.now.tomorrow
+    when YESTERDAY
+      Time.now.yesterday
+    else
+      Time.now
+    end
   end
 
   def content
