@@ -53,7 +53,7 @@ class DiaryGenerator
   end
 
   def determine_path
-    "#{DIARY_PATH}/#{0 if month < 10}#{month}_#{month_name.downcase}"
+    "#{DIARY_PATH}/#{year}/#{0 if month < 10}#{month}_#{month_name.downcase}"
   end
 end
 
