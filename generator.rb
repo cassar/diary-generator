@@ -30,11 +30,15 @@ class DiaryGenerator
   private
 
   def template_path(time)
-    if ['Saturday', 'Sunday'].include? time.strftime("%A")
+    if ['Saturday', 'Sunday'].include? day_name
       '/typical_day_template.md'
     else
       '/typical_work_day_template.md'
     end
+  end
+
+  def day_name
+    time.strftime '%A'
   end
 
   def determine_time
