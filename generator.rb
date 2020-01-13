@@ -27,8 +27,8 @@ class DiaryGenerator
     File.write "#{directory_path}/#{ordinal_day}.md", content
   end
 
-  def gratitude?
-    ['Monday', 'Wednesday', 'Friday'].include? day_name
+  def is_day?(*days)
+    days.include? day_name
   end
 
   private
