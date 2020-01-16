@@ -25,6 +25,7 @@ class DiaryGenerator
   def generate!
     Dir.mkdir directory_path unless File.exists? directory_path
     File.write "#{directory_path}/#{ordinal_day}.md", content
+    puts "New diary entry created for the #{heading}"
   end
 
   def is_day?(*days)
