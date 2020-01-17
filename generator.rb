@@ -28,7 +28,7 @@ class DiaryGenerator
     puts "New diary entry created for the #{heading}"
   end
 
-  def is_day?(*days)
+  def should_do_on *days
     days.include? day_name
   end
 
