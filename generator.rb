@@ -25,7 +25,7 @@ class DiaryGenerator
   def generate!
     Dir.mkdir directory_path unless File.exists? directory_path
     File.write "#{directory_path}/#{ordinal_day}.md", content
-    puts "New diary entry created for the #{heading}"
+    puts in_green "New diary entry created for the #{heading}"
   end
 
   def should_do_on *days
@@ -63,6 +63,10 @@ class DiaryGenerator
 
   def determine_path
     "#{DIARY_PATH}/#{year}/#{0 if month < 10}#{month}_#{month_name.downcase}"
+  end
+
+  def in_green(text)
+    "\e[1;32m#{text}\e[0m"
   end
 end
 
