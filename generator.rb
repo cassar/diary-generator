@@ -24,7 +24,7 @@ class DiaryGenerator
 
   def generate!
     Dir.mkdir directory_path unless File.exists? directory_path
-    File.write "#{directory_path}/#{ordinal_day}.md", content
+    File.write file_path, content
     puts in_green "New diary entry created for the #{heading}"
   end
 
@@ -33,6 +33,10 @@ class DiaryGenerator
   end
 
   private
+
+  def file_path
+    "#{directory_path}/#{ordinal_day}.md"
+  end
 
   def template_path(time)
     if ['Saturday', 'Sunday'].include? day_name
