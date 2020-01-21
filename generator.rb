@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 require 'erb'
 require 'active_support/all'
 require 'pry'
 
+# Used to generate the diary entry
 class DiaryGenerator
   DIARY_PATH = File.read('.diary_config').strip
   TOMORROW = 'tomorrow'
@@ -28,7 +31,7 @@ class DiaryGenerator
     puts in_green "New diary entry created for the #{heading}"
   end
 
-  def should_do_on *days
+  def should_do_on(*days)
     days.include? day_name
   end
 
@@ -38,8 +41,8 @@ class DiaryGenerator
     "#{directory_path}/#{ordinal_day}.md"
   end
 
-  def template_path(time)
-    if ['Saturday', 'Sunday'].include? day_name
+  def template_path
+    if %w[Saturday Sunday].include? day_name
       '/typical_day_template.md'
     else
       '/typical_work_day_template.md'
@@ -62,7 +65,7 @@ class DiaryGenerator
   end
 
   def content
-    ERB.new(File.read(DIARY_PATH + template_path(time))).result
+    ERB.new(File.read(DIARY_PATH + template_path)).result
   end
 
   def determine_path
