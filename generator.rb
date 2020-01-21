@@ -10,6 +10,9 @@ class DiaryGenerator
   TOMORROW = 'tomorrow'
   YESTERDAY = 'yesterday'
 
+  RED = 31
+  GREEN = 32
+
   attr_reader :time, :ordinal_day, :month, :month_name, :year, :directory_path
 
   def initialize
@@ -73,7 +76,15 @@ class DiaryGenerator
   end
 
   def in_green(text)
-    "\e[1;32m#{text}\e[0m"
+    in_colour text, GREEN
+  end
+
+  def in_red(text)
+    in_colour text, RED
+  end
+
+  def in_colour(text, colour)
+    "\e[1;#{colour}m#{text}\e[0m"
   end
 end
 
