@@ -48,7 +48,7 @@ class DiaryGenerator
     Dir.mkdir directory_path unless File.exist? directory_path
     return unless File.exist? file_path
 
-    puts 'Overwrite existing file? (yes/no)'
+    puts in_blue 'Overwrite existing file? (yes/no)'
     raise StandardError unless 'yes'.match? STDIN.gets.strip
   end
 

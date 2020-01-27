@@ -1,6 +1,7 @@
 module BashStyling
   RED = 31
   GREEN = 32
+  BLUE = 34
 
   def in_green(text)
     in_colour text, GREEN
@@ -8,6 +9,10 @@ module BashStyling
 
   def in_red(text)
     in_colour text, RED
+  end
+
+  def in_blue(text)
+    in_colour text, BLUE
   end
 
   def in_colour(text, colour)
