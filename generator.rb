@@ -4,14 +4,15 @@ require 'erb'
 require 'active_support/all'
 require 'pry'
 
+require_relative 'bash_styling'
+
 # Used to generate the diary entry
 class DiaryGenerator
   DIARY_PATH = File.read('.diary_config').strip
   TOMORROW = 'tomorrow'
   YESTERDAY = 'yesterday'
 
-  RED = 31
-  GREEN = 32
+  include BashStyling
 
   attr_reader :time, :ordinal_day, :month, :month_name, :year, :directory_path
 
@@ -84,22 +85,6 @@ class DiaryGenerator
 
   def determine_path
     "#{DIARY_PATH}/#{year}/#{0 if month < 10}#{month}_#{month_name.downcase}"
-  end
-
-  def in_green(text)
-    in_colour text, GREEN
-  end
-
-  def in_red(text)
-    in_colour text, RED
-  end
-
-  def in_colour(text, colour)
-    "\e[1;#{colour}m#{text}\e[0m"
-  end
-
-  def in_shell_format(*paths)
-    paths.map { |p| p.gsub(/\s/, '\ ') }.join ' '
   end
 end
 
