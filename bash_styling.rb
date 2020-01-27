@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Styling for generator output
 module BashStyling
   RED = 31
   GREEN = 32
