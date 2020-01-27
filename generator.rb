@@ -32,7 +32,7 @@ class DiaryGenerator
     prepare_directory_path
     File.write file_path, content
     puts in_green "New diary entry created for the #{heading}"
-    system "atom #{file_path.gsub(/\s/, '\ ')}"
+    system "atom #{in_shell_format file_path}"
   rescue StandardError
     puts in_red "Diary generator aborted for #{heading}"
   end
@@ -96,6 +96,10 @@ class DiaryGenerator
 
   def in_colour(text, colour)
     "\e[1;#{colour}m#{text}\e[0m"
+  end
+
+  def in_shell_format(path)
+    path.gsub(/\s/, '\ ')
   end
 end
 
