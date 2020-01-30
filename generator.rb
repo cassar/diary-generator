@@ -74,10 +74,10 @@ class DiaryGenerator
   end
 
   def determine_time
-    case ARGV.first
-    when TOMORROW
+    case ARGV.join
+    when Regexp.new(TOMORROW)
       Time.now.tomorrow
-    when YESTERDAY
+    when Regexp.new(YESTERDAY)
       Time.now.yesterday
     else
       Time.now
