@@ -29,13 +29,9 @@ class DiaryGenerator
     "#{ordinal_day} #{month_name} #{year}"
   end
 
-  def generate!
-    prepare_directory_path
-    File.write file_path, content
-    puts in_green "New diary entry created for the #{heading}"
+  def handle
+    generate!
     system "atom #{in_shell_format DIARY_PATH, file_path}"
-  rescue StandardError
-    puts in_red "Diary generator aborted for #{heading}"
   end
 
   def should_do_on(*days)
@@ -43,6 +39,14 @@ class DiaryGenerator
   end
 
   private
+
+  def generate!
+    prepare_directory_path
+    File.write file_path, content
+    puts in_green "New diary entry created for the #{heading}"
+  rescue StandardError
+    puts in_red "Diary generator aborted for #{heading}"
+  end
 
   def prepare_directory_path
     Dir.mkdir directory_path unless File.exist? directory_path
@@ -88,5 +92,4 @@ class DiaryGenerator
   end
 end
 
-generator = DiaryGenerator.new
-generator.generate!
+DiaryGenerator.new.handle
