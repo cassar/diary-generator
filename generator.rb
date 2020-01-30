@@ -11,6 +11,7 @@ class DiaryGenerator
   DIARY_PATH = File.read('.diary_config').strip
   TOMORROW = 'tomorrow'
   YESTERDAY = 'yesterday'
+  OPEN = 'open'
 
   include BashStyling
 
@@ -30,7 +31,7 @@ class DiaryGenerator
   end
 
   def handle
-    generate!
+    generate! unless ARGV.include? OPEN
     system "atom #{in_shell_format DIARY_PATH, file_path}"
   end
 
