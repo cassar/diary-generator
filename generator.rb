@@ -45,8 +45,8 @@ class DiaryGenerator
     prepare_directory_path
     File.write file_path, content
     puts in_green "New diary entry created for the #{heading}"
-  rescue StandardError
-    puts in_red "Diary generator aborted for #{heading}"
+  rescue StandardError => e
+    puts in_red e
   end
 
   def prepare_directory_path
@@ -54,7 +54,9 @@ class DiaryGenerator
     return unless File.exist? file_path
 
     puts in_blue 'Overwrite existing file? (yes/no)'
-    raise StandardError unless 'yes'.match? STDIN.gets.strip
+    return if 'yes'.match? STDIN.gets.strip
+
+    raise StandardError, "Diary generator aborted for #{heading}"
   end
 
   def file_path
