@@ -12,6 +12,7 @@ class DiaryGenerator
   TOMORROW = 'tomorrow'
   YESTERDAY = 'yesterday'
   OPEN = 'open'
+  HELP = '--help'
 
   include BashStyling
 
@@ -31,6 +32,8 @@ class DiaryGenerator
   end
 
   def handle
+    return help_message if ARGV.include? HELP
+
     generate! unless ARGV.include? OPEN
     system "atom #{in_shell_format DIARY_PATH, file_path}"
   end
@@ -40,6 +43,16 @@ class DiaryGenerator
   end
 
   private
+
+  def help_message
+    puts ''"
+    Usage: diary [options]
+      open
+      tomorrow
+      yesterday
+      --help
+    "''
+  end
 
   def generate!
     prepare_directory_path
