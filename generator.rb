@@ -95,4 +95,4 @@ class DiaryGenerator
   end
 end
 
-DiaryGenerator.new.handle
+(generator = DiaryGenerator.new).handle
