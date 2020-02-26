@@ -8,7 +8,7 @@ require_relative 'bash_styling'
 
 # Used to generate the diary entry
 class DiaryGenerator
-  DIARY_PATH = File.read('.diary_config').strip
+  DIARY_PATH = File.read("#{Dir.home}/.diary_config").strip
   TOMORROW = 'tomorrow'
   YESTERDAY = 'yesterday'
   OPEN = 'open'
