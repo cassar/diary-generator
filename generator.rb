@@ -2,7 +2,6 @@
 
 require 'erb'
 require 'active_support/all'
-require 'pry'
 
 require_relative 'bash_styling'
 
