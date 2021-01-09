@@ -15,7 +15,7 @@ class DiaryGenerator
 
   include BashStyling
 
-  attr_reader :time, :ordinal_day, :month, :month_name, :year, :directory_path
+  attr_reader :time, :ordinal_day, :month, :month_name, :year
 
   def initialize
     @time = determine_time
@@ -23,7 +23,6 @@ class DiaryGenerator
     @month = time.month
     @month_name = time.strftime '%B'
     @year = time.year
-    @directory_path = determine_path
   end
 
   def heading
@@ -62,7 +61,8 @@ class DiaryGenerator
   end
 
   def prepare_directory_path
-    Dir.mkdir directory_path unless File.exist? directory_path
+    Dir.mkdir directory_path_to_year unless File.exist? directory_path_to_year
+    Dir.mkdir directory_path_to_month unless File.exist? directory_path_to_month
     return unless File.exist? file_path
 
     puts in_blue 'Overwrite existing file? (yes/no)'
@@ -72,7 +72,7 @@ class DiaryGenerator
   end
 
   def file_path
-    "#{directory_path}/#{ordinal_day}.md"
+    "#{directory_path_to_month}/#{ordinal_day}.md"
   end
 
   def template_path
@@ -102,8 +102,12 @@ class DiaryGenerator
     ERB.new(File.read(DIARY_PATH + template_path)).result
   end
 
-  def determine_path
-    "#{DIARY_PATH}/#{year}/#{0 if month < 10}#{month}_#{month_name.downcase}"
+  def directory_path_to_month
+    "#{directory_path_to_year}/#{0 if month < 10}#{month}_#{month_name.downcase}"
+  end
+
+  def directory_path_to_year
+    "#{DIARY_PATH}/#{year}"
   end
 end
 
